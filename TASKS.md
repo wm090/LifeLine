@@ -38,6 +38,8 @@ None yet - Project initialization phase
 - [ ] Implement secure secrets handling
 - [ ] Set up development, staging, and production environments
 
+----------------------------
+Do not do this tasks
 #### Authentication & Security
 - [ ] Implement secure local storage mechanism
 - [ ] Set up authentication flow
@@ -45,6 +47,7 @@ None yet - Project initialization phase
 - [ ] Implement rate limiting
 - [ ] Set up input validation and sanitization utilities
 - [ ] Configure error handling and logging system
+-------------------------------
 
 ### Phase 2: Core Features
 
