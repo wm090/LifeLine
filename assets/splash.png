@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1242" height="2436" viewBox="0 0 1242 2436">
+  <rect width="1242" height="2436" fill="#6200ee" />
+  <path d="M621 1000 L921 1300 L621 1600 L321 1300 Z" fill="white" />
+  <circle cx="621" cy="1300" r="150" fill="#6200ee" stroke="white" stroke-width="20" />
+  <text x="621" y="1800" font-family="Arial" font-size="120" fill="white" text-anchor="middle">LifeLine</text>
+</svg>

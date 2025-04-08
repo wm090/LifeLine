@@ -1,34 +1,63 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { useEffect, useState } from "react";
+import * as SecureStore from "expo-secure-store";
+import Timeline from "./components/Timeline";
+import BirthdayModal from "./components/BirthdayModal";
+import { ThemeProvider, useThemeToggle } from "./contexts/ThemeContext";
+import ResponsiveContainer from "./components/ResponsiveContainer";
+import LoadingIndicator from "./components/LoadingIndicator";
+import { Button } from "react-native-paper";
 
-export default function Page() {
+function AppContent() {
+  const [birthdate, setBirthdate] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const { toggleTheme } = useThemeToggle();
+
+  useEffect(() => {
+    (async () => {
+      const saved = await SecureStore.getItemAsync("birthdate");
+      if (saved) {
+        setBirthdate(new Date(saved));
+      } else {
+        setShowModal(true);
+      }
+    })();
+  }, []);
+
+  const handleSaveBirthdate = async (date) => {
+    await SecureStore.setItemAsync("birthdate", date.toISOString());
+    setBirthdate(date);
+    setShowModal(false);
+  };
+
+  if (!birthdate && !showModal) {
+    return <LoadingIndicator />;
+  }
+
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
+    <ResponsiveContainer>
+      <View style={styles.header}>
+        <Button mode="contained" onPress={toggleTheme}>
+          Toggle Theme
+        </Button>
       </View>
-    </View>
+      {birthdate && <Timeline birthdate={birthdate} />}
+      <BirthdayModal visible={showModal} onSave={handleSaveBirthdate} />
+    </ResponsiveContainer>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
+  header: {
+    padding: 16,
+    alignItems: 'flex-end',
   },
 });
