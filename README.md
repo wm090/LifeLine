@@ -12,4 +12,3 @@ npx create-expo-app -e with-router
 
 - [Expo Router: Docs](https://docs.expo.dev/router/introduction/)
 
-Test
