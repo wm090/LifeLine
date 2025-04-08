@@ -407,6 +407,13 @@ const styles = StyleSheet.create({
   container: {
     height: 250, // Increased height to accommodate zoom buttons
     justifyContent: 'center',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: '50%',
+    marginTop: -125, // Half the height to center it vertically
+    backgroundColor: 'transparent', // Ensure background is transparent to not block other UI
+    zIndex: 10, // Ensure it appears above other elements
   },
   scrollContainer: {
     alignItems: 'center',
